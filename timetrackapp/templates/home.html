@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Projects</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.username }}!</h1>
+    <h2>Projects:</h2>
+    <ul>
+        {% for project in projects %}
+        <li>{{ project.name }}
+            <form method="POST" action="{% url 'start_work' project.id %}">
+                {% csrf_token %}
+                <button type="submit">Start Work</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

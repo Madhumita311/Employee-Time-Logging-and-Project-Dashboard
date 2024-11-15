@@ -1,0 +1,15 @@
+<!-- templates/registration/logout.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You have logged out</title>
+</head>
+<body>
+    <h1>You have successfully logged out.</h1>
+    <p>Thank you for using our application!</p>
+    <a href="{% url 'login' %}">Log in again</a>
+    <a href="{% url 'home' %}">Go to Home</a>
+</body>
+</html>
