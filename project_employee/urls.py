@@ -37,5 +37,6 @@ urlpatterns = [
     path('add_project/', views.add_project, name='add_project'),
     path('edit_project/<int:pk>/', views.edit_project, name='edit_project'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('signup/', views.signup, name='signup'),
     path('accounts/login/', auth_views.LoginView.as_view(form_class=CustomLoginForm), name='login'),
 ]

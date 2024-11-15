@@ -1,7 +1,5 @@
-# timetrackapp/views.py
-# from .forms import ProjectForm, WorkHourForm
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect,get_object_or_404
-# from django.contrib.messages import login, authenticate,messages
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from .models import Project, WorkHour
@@ -30,11 +28,17 @@ def home(request):
     return render(request, 'home.html', {'projects': projects})
 
 # User signup view
+
 def signup(request):
-    if request.method == 'POST':
-        # Add your signup logic here
-        pass
-    return render(request, 'signup.html')
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()  # Save the new user to the database
+            return redirect("login")  # Redirect to login page after successful signup
+    else:
+        form = UserCreationForm()  # Empty form for GET request
+    return render(request, "registration/signup.html", {"form": form})
+
 
 # Start and stop work on a project
 @login_required
