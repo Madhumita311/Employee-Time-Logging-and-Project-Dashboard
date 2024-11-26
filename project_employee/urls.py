@@ -27,6 +27,7 @@ from django.contrib import admin
 from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', views.home, name='home'),
+    path('admin/', admin.site.urls),
     path('signup/', views.signup, name='signup'),
     path('start_work/<int:project_id>/', views.start_work, name='start_work'),
     path('stop_work/<int:work_hour_id>/', views.stop_work, name='stop_work'),

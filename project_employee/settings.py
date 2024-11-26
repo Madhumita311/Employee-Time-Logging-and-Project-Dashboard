@@ -55,7 +55,9 @@ ROOT_URLCONF = 'project_employee.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+              BASE_DIR / 'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,3 +126,6 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # settings.py
 LOGIN_REDIRECT_URL = '/'  # Redirect to home page after login
+# settings.py
+# AUTH_USER_MODEL = 'timetrackapp.MyUser'  # Update with the correct app name and model if needed
+

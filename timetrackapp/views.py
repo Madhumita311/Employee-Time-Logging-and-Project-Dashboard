@@ -7,7 +7,7 @@ from .forms import ProjectForm, WorkHourForm
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from .forms import CustomLoginForm
-from django.contrib.auth import login, authenticate
+# from django.contrib.auth import login, authenticate
 
 def custom_login_view(request):
     if request.method == 'POST':
@@ -29,16 +29,35 @@ def home(request):
 
 # User signup view
 
+# def signup(request):
+#     if request.method == "POST":
+#         form = UserCreationForm(request.POST)
+#         if form.is_valid():
+#             form.save()  # Save the new user to the database
+#             return redirect("login")  # Redirect to login page after successful signup
+#     else:
+#         form = UserCreationForm()  # Empty form for GET request
+#     return render(request, "registration/signup.html", {"form": form})
+from django.contrib.auth import login
+from django.contrib import messages
+
+# User signup view
 def signup(request):
-    if request.method == "POST":
+    if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save()  # Save the new user to the database
-            return redirect("login")  # Redirect to login page after successful signup
+            # Save the new user and log them in
+            user = form.save()
+            login(request, user)  # Log in the user after successful signup
+            messages.success(request, f'Account created for {user.username}!')
+            return redirect('login')  # Redirect to the home page or any other page
+        else:
+            # If the form is not valid, show errors
+            messages.error(request, 'Please correct the error below.')
     else:
-        form = UserCreationForm()  # Empty form for GET request
-    return render(request, "registration/signup.html", {"form": form})
+        form = UserCreationForm()
 
+    return render(request, 'registration/signup.html',{'form':form})
 
 # Start and stop work on a project
 @login_required

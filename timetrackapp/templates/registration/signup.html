@@ -1,17 +1,137 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
+    <title>Signup</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+
+        .success {
+            color: green;
+            margin-bottom: 10px;
+        }
+
+        .message-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .message-list li {
+            margin-bottom: 10px;
+        }
+
+        .login-link {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h2>Create an account</h2>
-    <form method="post">
+    <h2>Signup</h2>
+
+    <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div>
+            <label for="{{ form.username.id_for_label }}">Username</label>
+            {{ form.username }}  <!-- Renders the username input field -->
+            {% if form.username.errors %}
+                <ul>
+                    {% for error in form.username.errors %}
+                        <li>{{ error }}</li> <!-- Show any validation errors for the username field -->
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div>
+            <label for="{{ form.password1.id_for_label }}">Password</label>
+            {{ form.password1 }}  <!-- Renders the password input field -->
+            {% if form.password1.errors %}
+                <ul>
+                    {% for error in form.password1.errors %}
+                        <li>{{ error }}</li> <!-- Show any validation errors for the password field -->
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div>
+            <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+            {{ form.password2 }}  <!-- Renders the confirm password input field -->
+            {% if form.password2.errors %}
+                <ul>
+                    {% for error in form.password2.errors %}
+                        <li>{{ error }}</li> <!-- Show any validation errors for the confirm password field -->
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <!-- Display form fields -->
+        <!-- {{ form.as_p }} -->
+
         <button type="submit">Sign Up</button>
     </form>
+
+    <!-- Display any messages (success/error) -->
+    {% if messages %}
+        <ul class="message-list">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Display specific field errors -->
+    {% if form.errors %}
+        <ul class="error">
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Link to login page -->
+    <div class="login-link">
+        Already have an account? <a href="{% url 'login' %}">Login here</a>
+    </div>
 </body>
 </html>
