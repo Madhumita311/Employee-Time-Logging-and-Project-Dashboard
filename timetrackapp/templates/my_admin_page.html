@@ -1,0 +1,25 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div class="app-dashboard">
+    <h1>Welcome, {{ user.username }}</h1>
+    <p>This is your custom admin page styled like Django's Admin interface.</p>
+
+    <div class="module">
+        <h2>Available Projects</h2>
+        <ul>
+            {% for project in projects %}
+                <li>{{ project.name }} - {{ project.description }}</li>
+            {% empty %}
+                <li>No projects available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="module">
+        <h2>Actions</h2>
+        <a href="{% url 'start_work' %}" class="button">Start Work</a>
+        <a href="{% url 'switch_project' %}" class="button">Switch Project</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-<!-- templates/registration/logout.html -->
+<!-- work_started.html -->
 {% extends 'base.html' %}
 
 {% block title %}Logout - My Website{% endblock %}
@@ -9,12 +9,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>You have logged out</title>
+    <title>Work Started</title>
 </head>
 <body>
-    <h1>You have successfully logged out.</h1>
-    <p>Thank you for using our application!</p>
-    <a href="{% url 'login' %}">Log in again</a>
+    <h1>Hi {{ user.username }}!</h1>
+    <p>You started working on the project: {{ project.name }}.</p>
     <a href="{% url 'home' %}">Go to Home</a>
 </body>
 </html>

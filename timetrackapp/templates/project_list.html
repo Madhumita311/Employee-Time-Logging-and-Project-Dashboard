@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}--{% endblock %}
+{%block content%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Project List</title>
+</head>
+<body>
+    <h1>Project List</h1>
+    <ul>
+        {% for project in projects %}
+            <li>
+                {{ project.name }}
+                <a href="{% url 'edit_project' project.id %}">Edit</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+{%endblock%}

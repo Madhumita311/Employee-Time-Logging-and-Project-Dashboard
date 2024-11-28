@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Stop Work{% endblock %}
+{% block content %}
+<form method="POST" action="{% url 'stop_work' active_work_hours.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger btn-sm">Stop Work</button>
+</form>
+{% endblock %}

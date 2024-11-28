@@ -1,20 +1,69 @@
+<!-- {% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{%block content%} -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects</title>
+    <!-- Add Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Welcome, {{ user.username }}!</h1>
-    <h2>Projects:</h2>
-    <ul>
-        {% for project in projects %}
-        <li>{{ project.name }}
-            <form method="POST" action="{% url 'start_work' project.id %}">
-                {% csrf_token %}
-                <button type="submit">Start Work</button>
-            </form>
-        </li>
-        {% endfor %}
-    </ul>
+<body><center>
+    <div class="container mt-5">
+        <!-- Welcome Section -->
+        <div class="text-center mb-4">
+            <h1>Welcome, {{ user.username }}!</h1>
+        </div>
+
+        <!-- Start Button -->
+        <!-- <div class="text-center mb-5">
+            <button class="btn btn-primary">Start</button>
+        </div> -->
+
+        <!-- Projects List -->
+        <h2 class="mb-4">Projects:</h2>
+        <ul class="list-group mb-4">
+            {% for project in projects %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ project.name }}
+                <form method="POST" action="{% url 'start_work' project.id %}" class="d-inline-block">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-success btn-sm">Start Work</button>
+                </form>
+                <!-- Add Edit and Delete Links
+                <a href="{% url 'edit_project' project.id %}" class="btn btn-warning btn-sm ml-2">Edit</a>
+                <a href="{% url 'delete_project' project.id %}" class="btn btn-danger btn-sm ml-2">Delete</a> -->
+            </li>
+            {% endfor %}
+        </ul>
+<!-- Display stop button for active sessions -->
+{% if active_work_hours %}
+<form method="POST" action="{% url 'stop_work' active_work_hours.id %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Stop</button>
+</form>
+{% else %}
+    <p>No active work session.</p>
+{% endif %}
+        <!-- Stop Button -->
+        <!-- <div class="text-center">
+            <button class="btn btn-danger">Stop</button>
+        </div> -->
+        <!-- <div class="text-center">
+            <button class="btn btn-warning">Switch Project</button>
+        </div> -->
+        <div class="text-center">
+            <a href="{% url 'switch_project' %}" class="btn btn-warning">Switch Project</a>
+        </div>
+        
+
+    </div>
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    </center>
 </body>
 </html>
+<!-- {%endblock%} -->
