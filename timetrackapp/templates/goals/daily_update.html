@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - My Website{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Daily Update for {{ goal.title }}</title> --> 
+ </head>
+
+<body>
+    <!-- <h1>Daily Update for "{{ goal.title }}"</h1> -->
+
+   <h1> Form for daily update</h1> 
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Daily Update</button>
+    </form>
+
+    <a href="{% url 'goal_list' %}">Back to Goal List</a>
+    <br><a href="{% url 'home' %}">Go to Home</a>
+
+</body>
+</html>
+{%endblock%}

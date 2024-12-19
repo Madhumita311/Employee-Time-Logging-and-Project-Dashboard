@@ -1,8 +1,15 @@
+<!-- timetrackapp/templates/start_project.html -->
+
 {% extends 'base.html' %}
-{% block title %}--{% endblock %}
-{%block content%}
-<form method="POST" action="{% url 'start_work' project.id %}">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-success btn-sm">Start Work</button>
-</form>
-{%endblock%}
+{% block title %}Start Project{% endblock %}
+{% block content %}
+    <h1>Set your Weekly Goals</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ goal_form.as_p }}
+        <button type="submit">Start Project</button>
+    </form>
+    
+    <p>create goals  <a href="{% url 'create_goal' project_id=project.id  %}">Create a new goal</a>.</p>
+  
+{% endblock %}

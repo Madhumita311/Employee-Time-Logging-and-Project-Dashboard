@@ -1,8 +1,21 @@
+<!-- timetrackapp/templates/stop_project.html -->
+
 {% extends 'base.html' %}
 {% block title %}Stop Work{% endblock %}
 {% block content %}
-<form method="POST" action="{% url 'stop_work' active_work_hours.id %}">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger btn-sm">Stop Work</button>
-</form>
+    <h1>Stop Work on Project: {{ work_hour.project.name }}</h1>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="completed">Completed</label>
+        <textarea name="completed">{{ work_hour.project.goal.completed }}</textarea><br>
+        
+        <label for="dependencies">Dependencies</label>
+        <textarea name="dependencies">{{ work_hour.project.goal.dependencies }}</textarea><br>
+        
+        <label for="pending">Pending</label>
+        <textarea name="pending">{{ work_hour.project.goal.pending }}</textarea><br>
+
+        <button type="submit">Stop Work</button>
+    </form>
 {% endblock %}

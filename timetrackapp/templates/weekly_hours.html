@@ -1,0 +1,21 @@
+
+
+{% extends 'base.html' %}
+{% block title %}Weekly Hours{% endblock %}
+{% block content %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Weekly Hours</title> -->
+</head>
+<body>
+    <h1>Weekly Hours</h1>
+    <p><strong>Total Hours Worked:</strong> {{ total_hours_worked }}</p>
+
+    <h2>Project Hours Breakdown</h2>
+    <img src="data:image/png;base64,{{ graph }}" alt="Weekly Project Hours Graph" style="max-width:100%; height:auto;">
+
+</body>
+</html>
+{%endblock%}

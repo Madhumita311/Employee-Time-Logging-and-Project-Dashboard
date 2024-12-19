@@ -1,0 +1,27 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Goal</title>
+</head> -->
+
+{% extends 'base.html' %}
+{% block title %}Start Project{% endblock %}
+{% block content %}
+<body>
+    <h1>Create a New Goal</h1>
+
+    <!-- Form for goal creation -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Goal</button>
+    </form>
+
+    <a href="{% url 'goal_list' %}">Back to Goal List</a>
+    <a href="{% url 'work_started' work_hour_id=work_hour.id %}">Work Started</a>
+
+<!-- </body>
+</html> -->
+{%endblock%}

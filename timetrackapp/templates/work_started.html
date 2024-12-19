@@ -12,9 +12,10 @@
     <title>Work Started</title>
 </head>
 <body>
-    <h1>Hi {{ user.username }}!</h1>
-    <p>You started working on the project: {{ project.name }}.</p>
-    <a href="{% url 'home' %}">Go to Home</a>
+    <h1>Hi {{ user.username }}!</h1><br>
+    <p>You started working on the project: {{ project.name }}.</p><br>
+    <a href="{% url 'home' %}">Go to Home</a><br>
+    <a href="{% url 'goal_list' %}">Goal list</a>
 </body>
 </html>
 {%endblock%}

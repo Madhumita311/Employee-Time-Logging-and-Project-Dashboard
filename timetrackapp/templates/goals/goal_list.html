@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}goal_list{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal List</title>
+</head>
+<body>
+    <h1>Goal List</h1>
+
+
+    {% if goals %}
+        <ul>
+            {% for goal in goals %}
+                <li>
+                    <strong>{{ goal.title }}</strong> 
+                    ({{ goal.start_date }} - {{ goal.end_date }}) 
+                    <a href="{% url 'daily_update' goal.id %}">Daily Update</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}<br>
+        <p>No goals available. <a href="{% url 'create_goal' project_id=project.id %}">Create a new goal</a>.</p>
+    {% endif %}
+</body>
+</html><br>
+<a href="{% url 'home' %}">Go to Home</a><br>
+<a href="{% url 'start_work'  project_id=project.id %}">start_work</a>
+
+
+{%endblock%}

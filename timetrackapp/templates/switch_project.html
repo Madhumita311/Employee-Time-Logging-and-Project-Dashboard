@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Switch Project</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 </head>
 <body>
     <div class="container mt-5 text-center">
@@ -25,7 +25,28 @@
             <button type="submit" class="btn btn-primary">Change</button>
         </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script> -->
 </body>
 </html>
 {%endblock%}
+@login_required
+def switch_project(request):
+    # Get the list of all projects
+    projects = Project.objects.all()
+
+    if request.method == 'POST':
+        # Get the selected project from the POST data
+        selected_project_id = request.POST.get('project')
+        if selected_project_id:
+            selected_project = Project.objects.get(id=selected_project_id)
+            # Update the user's current project in the database
+            request.user.current_project = selected_project
+            request.user.save()  # Save the user with the new project
+
+            # Optionally store the project in the session for quick access during the session
+            request.session['current_project'] = selected_project.id
+            
+            # Redirect to the confirmation page (or dashboard)
+            return redirect('project_switched', project_id=selected_project.id)
+
+    return render(request, 'switch_project.html', {'projects': projects})
